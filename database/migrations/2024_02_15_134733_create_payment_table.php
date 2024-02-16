@@ -16,9 +16,9 @@ return new class extends Migration
             $table->timestamps();
             $table->integer("paid_amount");
             $table->unsignedBigInteger("sale_id");
-            $table->foreign('sale_id')->references('id')->on('sale')->onDelete('cascade');
+            $table->foreign('sale_id')->references('id')->on('sales')->onDelete('cascade');
             $table->unsignedBigInteger("member_id");
-            $table->foreign('member_id')->references('id')->on('member')->onDelete('cascade');
+            $table->foreign('member_id')->references('id')->on('members')->onDelete('cascade');
         });
     }
 

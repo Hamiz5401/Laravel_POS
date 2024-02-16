@@ -12,4 +12,8 @@ class Sale extends Model
     public function sales_line_item(): HasMany {
         return $this->hasMany(SalesLineItem::class);
     }
+
+    public function payment(): HasOne {
+        return $this->hasOne(Payment::class);
+    }   
 }

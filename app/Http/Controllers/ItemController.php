@@ -3,9 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Items;
+use App\Http\Controllers\Controller;
 
 class ItemController extends Controller
 {
+    public static function get_all_items()
+    {
+        return Items::get();
+    }
+
     public function create_item(Request $request)
     {
         $request->validate([
@@ -21,46 +28,40 @@ class ItemController extends Controller
             'new_price.numeric' => 'New item price must be a number.',
         ]);
 
-        $item = new Item;
+        $item = new Items;
         $item->name = $request->new_item_name;
-        $item->amount = $request->new_stock;
+        $item->description = $request->new_item_description;
+        $item->amount = $request->new_amount;
         $item->price = $request->new_price;
 
         $item->save();
 
-        return;
+        return redirect('items');
     }
 
-    public function update(Request $request)
+    public function update_item(Request $request)
     {
         $request->validate([
-            'name' => 'required',
-            'description' => 'required',
-            'amount' => 'required|numeric',
-            'price' => 'required|numeric',
+            'amount' => 'numeric',
+            'price' => 'numeric',
+        ],[
+            'amount.numeric' => 'amount must be a number',
+            'price.numeric' => 'price must be a number',
         ]);
 
-        $item = Item::where('id', '=', $request->item_id)->first();
+        $item = Items::where('id', '=', $request->item_id)->first();
         $item->name = $request->name;
+        $item->description = $request->description;
         $item->amount = $request->amount;
         $item->price = $request->price;
         $item->save();
 
-        $affected = $item->sales_line_item()->get();
-        foreach($affected as $to_update_item) {
-            if($to_update_item->sale->payment->payment_type != 'unfinished') {
-                continue;
-            }
-            $to_update_item->total = $to_update_item->quantity * $item->price;
-            $to_update_item->save();
-        }
-
-        return;
+        return redirect('items');
     }
 
-    public function destroy(Request $request)
+    public function destroy_item(Request $request)
     {
         Item::where('id', '=', $request->item_id)->delete();
-        return;
+        return redirect('items');
     }
 }
