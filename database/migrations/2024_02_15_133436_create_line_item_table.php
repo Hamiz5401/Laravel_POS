@@ -17,11 +17,9 @@ return new class extends Migration
             $table->unsignedBigInteger("amount");
             $table->unsignedBigInteger("total_price");
             $table->unsignedBigInteger("item_id");
-            $table->foreign('item_id')->reference('id')->on('item')->onDelete('cascade');
-            $table->unsignedBigInteger("'item_name");
-            $table->foreign('item_name')->reference('name')->on('item')->onDelete('cascade');
-            $table->unsignedBigInteger("item_price");
-            $table->foreign('item_price')->reference('price')->on('item')->onDelete('cascade');
+            $table->foreign('item_id')->references('id')->on('item')->onDelete('cascade');
+            $table->unsignedBigInteger('sale_id');
+            $table->foreign('sale_id')->references('id')->on('sale')->onDelete('cascade');
         });
     }
 
