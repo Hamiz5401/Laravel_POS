@@ -20,28 +20,28 @@
                                 <div>
                                     <label for="item_name" class="col-sm-3 control-label">New Product name</label>
                                     <div class="col-sm-6 mt-3">
-                                        <input type="text" name="new_item_name" id="new_item_name" class="form-control" value="{{ old('new_item_name') }}">
+                                        <input type="text" name="new_item_name" id="new_item_name" class="form-control dark:bg-gray-900" value="{{ old('new_item_name') }}">
                                     </div>
                                 </div>
 
                                 <div class="ms-3">
                                     <label for="item_description" class="col-sm-3 control-label">New Product description</label>
                                     <div class="col-sm-6 mt-3">
-                                        <input type="text" name="new_item_description" id="new_item_description" class="form-control" value="{{ old('new_item_description') }}">
+                                        <input type="text" name="new_item_description" id="new_item_description" class="form-control dark:bg-gray-900" value="{{ old('new_item_description') }}">
                                     </div>
                                 </div>
                                 
                                 <div class="ms-3">
                                     <label for="amount" class="col-sm-3 control-label">Amount</label>
                                     <div class="col-sm-6 mt-3">
-                                        <input type="text" name="new_amount" id="new_amount" class="form-control" value="{{ old('new_amount') }}">
+                                        <input type="text" name="new_amount" id="new_amount" class="form-control dark:bg-gray-900" value="{{ old('new_amount') }}">
                                     </div>
                                 </div>
 
                                 <div class="ms-3">
                                     <label for="price" class="col-sm-3 control-label">Price</label>
                                     <div class="col-sm-6 mt-3">
-                                        <input type="text" name="new_price" id="new_price" class="form-control" value="{{ old('new_price') }}">
+                                        <input type="text" name="new_price" id="new_price" class="form-control dark:bg-gray-900" value="{{ old('new_price') }}">
                                     </div>
                                 </div>
                             </div>

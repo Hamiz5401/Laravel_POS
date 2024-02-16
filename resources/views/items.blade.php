@@ -44,7 +44,7 @@
                                     <td class="px-6 py-4 text-center"><input class="dark:bg-gray-900" name="amount" id="amount" value="{{ $item->amount }}"></td>
                                     <td class="px-6 py-4 text-center"><input class="dark:bg-gray-900" name="price" id="price" value="{{ $item->price }}"></td>
                                     <td class="px-6 py-4 text-center">
-                                        <x-primary-button class="mt-4 dark:bg-gray-500">
+                                        <x-primary-button class="mt-4">
                                             {{ __('Confirm Edit') }}
                                         </x-primary-button>
                                     </td>
@@ -54,7 +54,7 @@
                                         @csrf
                                         @method('delete')
                                         <input type="hidden" name="item_id" value="{{ $item->id }}">
-                                        <x-primary-button class="mt-4 dark:bg-gray-500">
+                                        <x-primary-button class="mt-4">
                                             {{ __('Delete') }}
                                         </x-primary-button>
                                         </form>
@@ -66,15 +66,15 @@
                         @endif
                     </div>
 
-                    <x-primary-button
-                        href="route('items-create')"
-                        tag="a"
-                        class="mt-4 dark:bg-gray-500"
-                    >
-                        Add item
-                    </x-primary-button>
 
                 </div>
+                <x-link-button
+                        tag="a"
+                        href="{{route('items-create')}}"
+                        class="mt-4 ml-4 mb-4"
+                >
+                    Add item
+                </x-link-button>
             </div>
         </div>
     </div>

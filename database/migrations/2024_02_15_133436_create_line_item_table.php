@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('line_items', function (Blueprint $table) {
+        Schema::create('sale_line_items', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
             $table->unsignedBigInteger("amount");

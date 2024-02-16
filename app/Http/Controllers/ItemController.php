@@ -61,7 +61,7 @@ class ItemController extends Controller
 
     public function destroy_item(Request $request)
     {
-        Item::where('id', '=', $request->item_id)->delete();
+        Items::where('id', '=', $request->item_id)->delete();
         return redirect('items');
     }
 }
