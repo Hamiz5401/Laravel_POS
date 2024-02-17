@@ -56,6 +56,38 @@
 
                     <div class="py-4 mt-3 text-xl font-bold">
                         Grand Total: {{ $total_price }} baht
+
+                        <form action="{{ route('payment.update_member') }}" method="POST" class="form-horizontal">
+                            {{ csrf_field() }}
+                            @method("patch")
+                            <div class="flex py-4">
+                                <div class="mt-3">
+                                    <div>
+                                        <label for="citizen_id">CitizenID</label>
+                                    </div>
+                                    <div class="mt-3">
+                                        <input name="citizen_id" id="citizen_id" value="{{ old('citizen_id') }}" class="dark:bg-gray-900">
+                                    </div>
+                                </div>
+                                <input type="hidden" name="sale_id" value="{{ $sale_id }}">
+                                <div class="mt-8">
+                                    <x-primary-button class="ms-4 mt-4 py-8 ">
+                                        {{ __('Add member') }}
+                                    </x-primary-button>
+                                </div>
+                            </div>
+                        </form>
+
+                        <form action="{{ route('payment.update') }}" method="POST" class="form-horizontal">
+                            {{ csrf_field() }}
+                            @method("patch")
+                                <div>
+                                <input type="hidden" name="sale_id" value="{{ $sale_id }}">
+                                    <x-primary-button class="ms-4 mt-4 py-8 ml-30">
+                                        {{ __('Pay') }}
+                                    </x-primary-button>
+                                </div>
+                        </form>
                     </div>
 
                     @include('sale.sale-create-form')

@@ -35,13 +35,13 @@
 
         <div class="flex justify-end mt-4 whitespace-nowrap">
             <div class="mr-20">
-                <x-primary-button
-                    href="route('register')"
+                <x-link-button
+                    href="register"
                     tag="a"
                     class=" dark:bg-gray-500"
                 >
                     Register?
-                </x-primary-button>
+                </x-link-button>
             </div>
             @if (Route::has('password.request'))
             <div class="mr-5">

@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Facades\Redirect;
 use App\Models\SaleLineItem;
 use Illuminate\Http\Request;
+use App\Http\Controllers\SaleController;
 
 class Sale extends Model
 {
@@ -40,8 +41,9 @@ class Sale extends Model
             $new_saleLineItem->save();
             
             $new_saleLineItem->increment('total_price', ($new_saleLineItem->amount * $new_saleLineItem->item->price));
-            
         }
+
+        SaleController::update_payment_paid_amount($request);
 
         return Redirect::route('dashboard');
     }

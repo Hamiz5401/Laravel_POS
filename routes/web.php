@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\SaleController;
 use App\Models\Sale;
+use App\Http\Controllers\MemberController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,12 +40,26 @@ Route::get('/dashboard', function (Request $request) {
     if($sale == null) {
         return Redirect::route('sale.create');
     }
+    elseif($sale->payment->paid == TRUE)
+    {
+        return Redirect::route('sale.create');
+    }
+
+    $payment_amount = $sale->payment->paid_amount;
 
     return view('dashboard')->with('sale', $sale)
-                            ->with('total_price', array_sum($sale->sales_line_item()->pluck('total_price')->all()))
+                            ->with('sale_id', $sale->id)
+                            ->with('total_price', $payment_amount)
                             ->with('sale_items', $sale->sales_line_item()->get())
                             ->with('items', ItemController::get_all_items());
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::get('/member', function (Request $request) {
+
+    $members = MemberController::get_all_members($request);
+
+    return view('member')->with('members', $members);
+})->middleware(['auth', 'verified'])->name('member');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -59,6 +74,12 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/add_line_item', [Sale::class, 'create_line_item'])->name('saleLineItem.create');
     Route::delete('/delete_item', [Sale::class, 'destroy_line_item'])->name('saleLineItem.delete');
+
+    Route::post('/member_create', [MemberController::class, 'create_member'])->name('member.create');
+    Route::post('/member_delete', [MemberController::class, 'delete_member'])->name('member.delete');
+
+    Route::patch('/payment_member', [SaleController::class, 'add_member_to_sale'])->name('payment.update_member');
+    Route::patch('/payment', [SaleController::class, 'process_payment'])->name('payment.update');
 });
 
 require __DIR__.'/auth.php';
