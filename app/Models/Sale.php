@@ -26,7 +26,7 @@ class Sale extends Model
     }   
 
     public function create_line_item(Request $request) {
-        $sale_line_item = SaleLineItem::where('sale_id', '=', $request->sale_id)->where('item_id', '=', $request->item_id)->first();
+        $sale_line_item = SaleLineItem::where('sale_id', '=', $request->id)->where('item_id', '=', $request->item_id)->first();
 
         if($sale_line_item != null) {
             $sale_line_item->increment('amount', $request->amount);
@@ -35,7 +35,7 @@ class Sale extends Model
         else {
             $new_saleLineItem = new SaleLineItem;
 
-            $new_saleLineItem->sale_id = $request->sale_id;
+            $new_saleLineItem->sale_id = $request->id;
             $new_saleLineItem->item_id = $request->item_id;
             $new_saleLineItem->amount = $request->amount;
             $new_saleLineItem->save();
@@ -49,9 +49,11 @@ class Sale extends Model
     }
 
     public function destroy_line_item(Request $request){
-        $sale_line_item = SaleLineItem::where('id', '=', $request->id)->first();
+        $sale_line_item = SaleLineItem::where('id', '=', $request->sale_item_id)->first();
         $sale_line_item->decrement('total_price', $sale_line_item->total_price);
+        SaleController::update_payment_paid_amount($request);
         $sale_line_item->delete();
+
         return Redirect::route('dashboard');
     }
 }

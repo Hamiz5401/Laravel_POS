@@ -19,7 +19,7 @@ class SaleController extends Controller
     {
         $target_sale = SaleController::get_sale_from_cashier($request);
         $sum_total_price = array_sum($target_sale->sales_line_item()->pluck('total_price')->all());
-        $payment = Payment::where('sale_id', '=', $request->sale_id)->first();
+        $payment = Payment::where('sale_id', '=', $request->id)->orderBy('id', 'DESC')->first();
         $payment->paid_amount = $sum_total_price;
 
         $payment->save();

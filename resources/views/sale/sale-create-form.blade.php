@@ -4,7 +4,7 @@
     <form action="{{ route('saleLineItem.create') }}" method="POST" class="form-horizontal">
         {{ csrf_field() }}
 
-        <input type="hidden" name="sale_id" value="{{ $sale->id }}">
+        <input type="hidden" name="id" value="{{ $sale->id }}">
 
         <div class="flex form-group">
             <div>

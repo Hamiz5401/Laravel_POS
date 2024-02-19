@@ -44,7 +44,8 @@
                                                 @csrf
                                                 @method('delete')
 
-                                                <input type="hidden" name="id" value="{{ $sale_item->id }}">
+                                                <input type="hidden" name="sale_item_id" value="{{ $sale_item->id }}">
+                                                <input type="hidden" name="id" value="{{ $sale->id }}">
                                                 <button type="submit" class="bg-red-500 hover:bg-red-600 text-white py-1 px-3 rounded-lg transition duration-300 ease-in-out">Remove</button>
                                             </form>
                                         </td>

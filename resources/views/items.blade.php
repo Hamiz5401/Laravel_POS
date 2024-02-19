@@ -36,6 +36,8 @@
                                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
                                             Actions
                                         </th>
+                                        <th>
+                                        </th>
                                     </tr>
                                 </thead>
                                 <tbody class="bg-gray-500 divide-y divide-gray-200 dark:divide-gray-700">
@@ -61,16 +63,18 @@
                                                 <button type="submit" class="dark:bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                                                     {{ __('Update') }}
                                                 </button>
-                                                <form action="{{ route('item.destroy') }}" method="POST" class="form-horizontal">
-                                                    @csrf
-                                                    @method('delete')
-                                                    <input type="hidden" name="item_id" value="{{ $item->id }}">
-                                                    <button type="submit" class="dark:bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded ml-3">
-                                                        {{ __('Delete') }}
-                                                    </button>
-                                                </form>
                                             </td>
                                         </form>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                            <form action="{{ route('item.destroy') }}" method="POST" class="form-horizontal">
+                                                        @csrf
+                                                        @method('delete')
+                                                        <input type="hidden" name="item_id" value="{{ $item->id }}">
+                                                        <button type="submit" class="dark:bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded ml-3">
+                                                            {{ __('Delete') }}
+                                                        </button>
+                                            </form>
+                                        </td>
                                     </tr>
                                     @endforeach
                                 </tbody>
