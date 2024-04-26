@@ -58,7 +58,7 @@ class SaleController extends Controller
         $total_price = array_sum($target_sale->sales_line_item()->pluck('total_price')->all());
         $payment = Payment::where('sale_id', '=', $request->sale_id)->first();
         $payment->member_id = $member->id;
-        $payment->paid_amount = $total_price * 0.9;
+        $payment->paid_amount = $total_price * 0.9;     
         $payment->save();
 
 
@@ -68,11 +68,11 @@ class SaleController extends Controller
         return Redirect::route('dashboard');
     }
 
-    public function process_payment(Request $request)
+    public function process_payment(Request $request) 
     {
         $payment = Payment::where('sale_id', '=', $request->sale_id)->first();
         $payment->paid = TRUE;
-        $payment->save();
+        $payment->save(); 
 
         return Redirect::route('dashboard');
     }

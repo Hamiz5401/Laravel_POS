@@ -18,7 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger("total_price");
             $table->unsignedBigInteger("item_id");
             $table->foreign('item_id')->references('id')->on('items')->onDelete('cascade');
-            $table->unsignedBigInteger('sale_id');
+            $table->unsignedBigInteger('sale_id');   
             $table->foreign('sale_id')->references('id')->on('sales')->onDelete('cascade');
         });
     }
